@@ -1,0 +1,119 @@
+.custom-chessboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.board-row {
+  display: flex;
+}
+
+.board-row.labels {
+  align-items: center;
+}
+
+.board-cell {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-cell.black {
+  background-color: #b58863;
+}
+
+.board-cell.white {
+  background-color: #f0d9b5;
+}
+
+.label-x,
+.label-y,
+.empty-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+}
+
+.label-x {
+  font-weight: bold;
+}
+
+.label-y {
+  font-weight: bold;
+}
+
+.pieces-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.piece img {
+  width: 45px;
+  height: 45px;
+  cursor: grab;
+}
+
+.color-toggle {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+    -1px -1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.color-toggle.black {
+  background-color: #222;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.color-toggle.white {
+  background-color: #eee;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.piece-wrapper.selected {
+  border: 2px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  animation: rainbow 3s linear infinite;
+  transition: border-image-source 500ms;
+}
+
+@keyframes rainbow {
+  0% {border-image-source: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);}
+  14% {border-image-source: linear-gradient(to left, red, violet, indigo, blue, green, yellow, orange);}
+  28% {border-image-source: linear-gradient(to left, orange, red, violet, indigo, blue, green, yellow);}
+  42% {border-image-source: linear-gradient(to left, yellow, orange, red, violet, indigo, blue, green);}
+  57% {border-image-source: linear-gradient(to left, green, yellow, orange, red, violet, indigo, blue);}
+  71% {border-image-source: linear-gradient(to left, blue, green, yellow, orange, red, violet, indigo);}
+  85% {border-image-source: linear-gradient(to left, indigo, blue, green, yellow, orange, red, violet);}
+  100% {border-image-source: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);}
+}
+
+.piece-image-container {
+  display: inline-block;
+  border: none;
+}
+
+.piece-wrapper {
+  display: inline-block;
+  transition: border 500ms;
+  border: 2px solid transparent;
+}
