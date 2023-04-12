@@ -90,7 +90,7 @@ const CustomChessboard = () => {
 
   return (
     <div className="custom-chessboard">
-      <div className="board">
+      <div className="board mr-14">
         <div className="board-row labels">
           <div className="empty-label" />
           {[...Array(8)].map((_, col) => (
@@ -116,34 +116,35 @@ const CustomChessboard = () => {
           </div>
         ))}
       </div>
-
-      <div className="pieces-container">
-        <button
-          className={`color-toggle m-3 p-4 ${isBlack ? "white" : "black"}`}
-          onClick={toggleColor}
-        />
-        {pieces.map((piece) => (
-          <div
-            key={piece.name}
-            className={`piece-wrapper ${
-              piece.name === selectedPiece.name ? "selected" : ""
-            }`}
-            onClick={() => handlePieceClick(piece)}
-          >
+      <div className="bg-stone-400 rounded-lg p-4 shadow-lg mt-4">
+        <div className="pieces-container">
+          <button
+            className={`color-toggle m-3 p-4 ${isBlack ? "white" : "black"}`}
+            onClick={toggleColor}
+          />
+          {pieces.map((piece) => (
             <div
-              className={`piece ${piece.name}`}
-              draggable
-              onDragStart={(e) => handleDragStart(e, piece)}
-              onDragEnd={handleDragEnd}
+              key={piece.name}
+              className={`piece-wrapper ${
+                piece.name === selectedPiece.name ? "selected" : ""
+              }`}
+              onClick={() => handlePieceClick(piece)}
             >
-              <img
-                src={isBlack ? piece.blackImg : piece.img}
-                alt={piece.name}
-                draggable="false"
-              />
+              <div
+                className={`piece ${piece.name}`}
+                draggable
+                onDragStart={(e) => handleDragStart(e, piece)}
+                onDragEnd={handleDragEnd}
+              >
+                <img
+                  src={isBlack ? piece.blackImg : piece.img}
+                  alt={piece.name}
+                  draggable="false"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

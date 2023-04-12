@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="h-auto bg-black text-white pt-32 grid">
+    <div className="h-auto w-full bg-black text-white pt-32 grid">
       <BrowserRouter>
         <NavBar />
         <Routes>
