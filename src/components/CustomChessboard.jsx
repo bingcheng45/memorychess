@@ -90,8 +90,8 @@ const CustomChessboard = () => {
 
   return (
     <div className="custom-chessboard">
-      <div className="board mr-14">
-        <div className="board-row labels">
+      <div className="board ml-auto mr-auto">
+        <div className="board-row labels mr-14">
           <div className="empty-label" />
           {[...Array(8)].map((_, col) => (
             <div key={col} className="label-x">

@@ -10,7 +10,11 @@ const Nav = () => {
   return (
     <div className="nav">
       <div className="nav-container">
-        <div className="navbar bg-black">
+        <div
+          className={`navbar bg-black transition-color duration-500 ${
+            navOpen ? "bg-inherit" : ""
+          }`}
+        >
           <div className="logo text-xs sm:text-lg">MemoryChess.co</div>
           <div className="flex items-center">
             <div className="signup text-xs sm:text-lg">Signup/Login</div>
