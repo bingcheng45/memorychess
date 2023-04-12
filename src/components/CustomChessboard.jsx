@@ -51,7 +51,9 @@ const CustomChessboard = () => {
     setSelectedPiece(piece);
     setDragging(true);
     e.dataTransfer.setData("text/plain", piece.name);
-    e.dataTransfer.setDragImage(e.target, 22, 22);
+    const img = new Image();
+    img.src = isBlack ? piece.blackImg : piece.img;
+    e.dataTransfer.setDragImage(img, 22, 22);
     e.dataTransfer.dropEffect = "move";
   };
 
@@ -91,7 +93,7 @@ const CustomChessboard = () => {
   return (
     <div className="custom-chessboard">
       <div className="board ml-auto mr-auto">
-        <div className="board-row labels mr-14">
+        <div className="board-row labels mr-10">
           <div className="empty-label" />
           {[...Array(8)].map((_, col) => (
             <div key={col} className="label-x">
@@ -116,7 +118,7 @@ const CustomChessboard = () => {
           </div>
         ))}
       </div>
-      <div className="bg-stone-400 rounded-lg p-4 shadow-lg mt-4">
+      <div className="bg-stone-400 rounded-lg p-0 lg:p-4 shadow-lg mt-4">
         <div className="pieces-container">
           <button
             className={`color-toggle m-3 p-4 ${isBlack ? "white" : "black"}`}
