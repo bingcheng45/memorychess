@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./NavBar.css";
+import "../assets/css/NavBar.css";
 
 const Nav = () => {
   const [navOpen, setNavOpen] = useState(false);
@@ -15,7 +15,11 @@ const Nav = () => {
           <div className="flex items-center">
             <div className="signup text-xs sm:text-lg">Signup/Login</div>
             <div className="menu-toggle" onClick={() => setNavOpen(!navOpen)}>
-            <div className={`${navOpen ? "hamBox hamBoxOpen" : "hamBox"} md:text-xl`}>
+              <div
+                className={`${
+                  navOpen ? "hamBox hamBoxOpen" : "hamBox"
+                } md:text-xl`}
+              >
                 <span className={navOpen ? "hidden" : "lineTopTop"}></span>
                 <span className={navOpen ? "lineTop spin" : "lineTop"}></span>
                 <span
