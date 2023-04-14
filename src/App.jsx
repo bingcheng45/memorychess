@@ -13,10 +13,11 @@ import NotFound from "./pages/NotFound";
 // import Contact from "./pages/contact";
 // import SignUp from "./pages/signup";
 
+
 function App() {
   return (
     <div className="h-auto w-full bg-black text-white pt-32 grid">
-      <BrowserRouter>
+      <BrowserRouter basename="/memorychess">
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
