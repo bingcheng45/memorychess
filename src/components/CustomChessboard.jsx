@@ -49,7 +49,8 @@ const CustomChessboard = () => {
 
   let touchStartX = 0;
   let touchEndX = 0;
-  
+  let lastTouchEndTime = 0;
+  const doublePressDelay = 300; // Time in milliseconds to detect double press
 
   const [draggingPiece, setDraggingPiece] = useState(null);
   const [isBlack, setIsBlack] = useState(false);
@@ -58,6 +59,10 @@ const CustomChessboard = () => {
   const [cursorImageUrl, setCursorImageUrl] = useState(pieces[0].img);
 
   useEffect(() => {
+    const doublePress = () => {
+      toggleColor();
+    };
+
     const swipeLeft = () => {
       selectPreviousPiece();
     };
@@ -79,6 +84,12 @@ const CustomChessboard = () => {
       } else if (distance < -100) {
         swipeLeft();
       }
+
+      const currentTime = new Date().getTime();
+      if (currentTime - lastTouchEndTime < doublePressDelay) {
+        doublePress();
+      }
+      lastTouchEndTime = currentTime;
     };
 
     document.addEventListener("touchstart", handleTouchStart);
