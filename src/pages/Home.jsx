@@ -15,54 +15,56 @@ function Home() {
       </div> */}
       <CustomChessboard />
 
-      <br />
-      <h1>Keyboard shortcuts:</h1>
-      <h1>Press s to change color</h1>
-      <h1>Press a to move to left piece</h1>
-      <h1>Press d to move to right piece</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
+      <div className="text-center">
+        <br />
+        <h1>Keyboard shortcuts:</h1>
+        <h1>Press S to change color</h1>
+        <h1>Press A to move to left piece</h1>
+        <h1>Press D to move to right piece</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+        <h1>bro</h1>
+      </div>
     </div>
   );
 }

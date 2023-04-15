@@ -47,6 +47,10 @@ const CustomChessboard = () => {
     },
   ]);
 
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+
   const [draggingPiece, setDraggingPiece] = useState(null);
   const [isBlack, setIsBlack] = useState(false);
   const [selectedPiece, setSelectedPiece] = useState(pieces[0]);
@@ -54,6 +58,32 @@ const CustomChessboard = () => {
   const [cursorImageUrl, setCursorImageUrl] = useState(pieces[0].img);
 
   useEffect(() => {
+    const swipeLeft = () => {
+      selectPreviousPiece();
+    };
+
+    const swipeRight = () => {
+      selectNextPiece();
+    };
+
+    const handleTouchStart = (e) => {
+      touchStartX = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      const distance = touchEndX - touchStartX;
+
+      if (distance > 100) {
+        swipeRight();
+      } else if (distance < -100) {
+        swipeLeft();
+      }
+    };
+
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchend", handleTouchEnd);
+
     const handleKeyPress = (e) => {
       if (e.key === "s" || e.key === "S") {
         toggleColor();
@@ -67,6 +97,8 @@ const CustomChessboard = () => {
     window.addEventListener("keydown", handleKeyPress);
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isBlack, selectedPiece, cursorImageUrl]);
 
