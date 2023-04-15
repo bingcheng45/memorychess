@@ -189,7 +189,7 @@ const CustomChessboard = () => {
           </div>
         ))}
       </div>
-      <div className="bg-stone-400 rounded-lg p-0 lg:p-4 shadow-lg mt-4">
+      <div className="bg-stone-400 rounded-lg ml-4 mr-4 p-0 lg:p-4 shadow-lg mt-4">
         <div className="pieces-container">
           <button
             className={`color-toggle m-3 p-4 ${isBlack ? "white" : "black"}`}
