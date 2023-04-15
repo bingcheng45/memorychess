@@ -107,7 +107,6 @@ const CustomChessboard = () => {
       });
     });
   };
-  
 
   const handleClick = (e) => {
     const boardCell = e.target.closest(".board-cell");
@@ -115,20 +114,19 @@ const CustomChessboard = () => {
     const currentPieceImg = `<img src="${
       isBlack ? selectedPiece.blackImg : selectedPiece.img
     }" alt="${selectedPiece.name}" draggable="false">`;
-  
+
     const currentColor = isBlack ? "black" : "white";
     const selectedPieceQuantity = selectedPiece.quantity[currentColor];
-  
+
     if (boardCell.innerHTML === currentPieceImg) {
       boardCell.innerHTML = "";
       updateQuantity(selectedPiece.name, currentColor, true);
     } else if (selectedPieceQuantity > 0) {
-      console.log(selectedPieceQuantity)
+      console.log(selectedPieceQuantity);
       boardCell.innerHTML = currentPieceImg;
       updateQuantity(selectedPiece.name, currentColor, false);
     }
   };
-  
 
   const toggleColor = () => {
     const newIsBlack = !isBlack;
@@ -175,31 +173,39 @@ const CustomChessboard = () => {
             className={`color-toggle m-3 p-4 ${isBlack ? "white" : "black"}`}
             onClick={toggleColor}
           />
-          {pieces.map((piece) => (
-            <div
-              key={piece.name}
-              className={`piece-wrapper ${
-                piece.name === selectedPiece.name ? "selected" : ""
-              }`}
-              onClick={() => handlePieceClick(piece)}
-            >
+          {pieces.map((piece) => {
+            const currentColor = isBlack ? "black" : "white";
+            const quantity = piece.quantity[currentColor];
+            const isZero = quantity === 0;
+            return (
               <div
-                className={`piece ${piece.name}`}
-                draggable
-                onDragStart={(e) => handleDragStart(e, piece)}
-                onDragEnd={handleDragEnd}
+                key={piece.name}
+                className={`piece-wrapper ${
+                  piece.name === selectedPiece.name ? "selected" : ""
+                }`}
+                onClick={() => handlePieceClick(piece)}
               >
-                <img
-                  src={isBlack ? piece.blackImg : piece.img}
-                  alt={piece.name}
-                  draggable="false"
-                />
+                <div
+                  className={`piece ${piece.name}`}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, piece)}
+                  onDragEnd={handleDragEnd}
+                >
+                  <img
+                    src={isBlack ? piece.blackImg : piece.img}
+                    alt={piece.name}
+                    draggable="false"
+                  />
+                </div>
+                <div
+                  className="quantity-text text-center"
+                  style={{ color: isZero ? "red" : "inherit" }}
+                >
+                  {quantity}
+                </div>
               </div>
-              <div className="quantity">
-                {isBlack ? piece.quantity.black : piece.quantity.white}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
