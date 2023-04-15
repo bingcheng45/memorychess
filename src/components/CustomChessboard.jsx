@@ -88,18 +88,26 @@ const CustomChessboard = () => {
     setCursorImageUrl(isBlack ? piece.blackImg : piece.img);
   };
 
-  const updateQuantity = (pieceName, color, increment = false) => {
-    setPieces((prevPieces) =>
-      prevPieces.map((piece) => {
+  const updateQuantity = (pieceName, color, increase) => {
+    setPieces((prevPieces) => {
+      return prevPieces.map((piece) => {
         if (piece.name === pieceName) {
-          const newQuantity = { ...piece.quantity };
-          newQuantity[color] += increment ? 1 : -1;
+          const newQuantity = {
+            ...piece.quantity,
+            [color]: increase
+              ? piece.quantity[color] + 1
+              : piece.quantity[color] - 1,
+          };
+          if (piece.name === selectedPiece.name) {
+            setSelectedPiece({ ...piece, quantity: newQuantity });
+          }
           return { ...piece, quantity: newQuantity };
         }
         return piece;
-      })
-    );
+      });
+    });
   };
+  
 
   const handleClick = (e) => {
     const boardCell = e.target.closest(".board-cell");
@@ -107,15 +115,20 @@ const CustomChessboard = () => {
     const currentPieceImg = `<img src="${
       isBlack ? selectedPiece.blackImg : selectedPiece.img
     }" alt="${selectedPiece.name}" draggable="false">`;
-    
+  
+    const currentColor = isBlack ? "black" : "white";
+    const selectedPieceQuantity = selectedPiece.quantity[currentColor];
+  
     if (boardCell.innerHTML === currentPieceImg) {
       boardCell.innerHTML = "";
-      updateQuantity(selectedPiece.name, isBlack ? "black" : "white", true);
-    } else {
+      updateQuantity(selectedPiece.name, currentColor, true);
+    } else if (selectedPieceQuantity > 0) {
+      console.log(selectedPieceQuantity)
       boardCell.innerHTML = currentPieceImg;
-      updateQuantity(selectedPiece.name, isBlack ? "black" : "white", false);
+      updateQuantity(selectedPiece.name, currentColor, false);
     }
   };
+  
 
   const toggleColor = () => {
     const newIsBlack = !isBlack;
