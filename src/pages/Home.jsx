@@ -15,10 +15,11 @@ function Home() {
       </div> */}
       <CustomChessboard />
 
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
-      <h1>bro</h1>
+      <br />
+      <h1>Keyboard shortcuts:</h1>
+      <h1>Press s to change color</h1>
+      <h1>Press a to move to left piece</h1>
+      <h1>Press d to move to right piece</h1>
       <h1>bro</h1>
       <h1>bro</h1>
       <h1>bro</h1>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/css/CustomChessboard.css";
 
 const CustomChessboard = () => {
@@ -52,6 +52,43 @@ const CustomChessboard = () => {
   const [selectedPiece, setSelectedPiece] = useState(pieces[0]);
   const [dragging, setDragging] = useState(false);
   const [cursorImageUrl, setCursorImageUrl] = useState(pieces[0].img);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "s" || e.key === "S") {
+        toggleColor();
+      } else if (e.key === "a" || e.key === "A") {
+        selectPreviousPiece();
+      } else if (e.key === "d" || e.key === "D") {
+        selectNextPiece();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [isBlack, selectedPiece, cursorImageUrl]);
+
+  const selectPreviousPiece = () => {
+    const currentIndex = pieces.findIndex(
+      (piece) => piece.name === selectedPiece.name
+    );
+    const newIndex = currentIndex === 0 ? pieces.length - 1 : currentIndex - 1;
+    setSelectedPiece(pieces[newIndex]);
+    const piece = pieces[newIndex];
+    setCursorImageUrl(isBlack ? piece.blackImg : piece.img);
+  };
+
+  const selectNextPiece = () => {
+    const currentIndex = pieces.findIndex(
+      (piece) => piece.name === selectedPiece.name
+    );
+    const newIndex = (currentIndex + 1) % pieces.length;
+    setSelectedPiece(pieces[newIndex]);
+    const piece = pieces[newIndex];
+    setCursorImageUrl(isBlack ? piece.blackImg : piece.img);
+  };
 
   const handleDragStart = (e, piece) => {
     setDraggingPiece(piece);
@@ -155,6 +192,23 @@ const CustomChessboard = () => {
     setIsBlack(newIsBlack);
     setCursorImageUrl(newIsBlack ? selectedPiece.blackImg : selectedPiece.img);
   };
+
+  const detectDevice = () => {
+    const userAgent = navigator.userAgent;
+
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        userAgent
+      );
+
+    if (isMobile) {
+      console.log("Device: Mobile");
+    } else {
+      console.log("Device: Laptop/PC");
+    }
+  };
+
+  // detectDevice();
 
   return (
     <div className="custom-chessboard">
