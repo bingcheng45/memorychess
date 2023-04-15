@@ -5,36 +5,42 @@ const CustomChessboard = () => {
   const [pieces, setPieces] = useState([
     {
       name: "pawn",
+      quantity: { white: 8, black: 8 },
       img: "https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg",
       blackImg:
         "https://upload.wikimedia.org/wikipedia/commons/c/c7/Chess_pdt45.svg",
     },
     {
       name: "knight",
+      quantity: { white: 2, black: 2 },
       img: "https://upload.wikimedia.org/wikipedia/commons/7/70/Chess_nlt45.svg",
       blackImg:
         "https://upload.wikimedia.org/wikipedia/commons/e/ef/Chess_ndt45.svg",
     },
     {
       name: "bishop",
+      quantity: { white: 2, black: 2 },
       img: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Chess_blt45.svg",
       blackImg:
         "https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt45.svg",
     },
     {
       name: "rook",
+      quantity: { white: 2, black: 2 },
       img: "https://upload.wikimedia.org/wikipedia/commons/7/72/Chess_rlt45.svg",
       blackImg:
         "https://upload.wikimedia.org/wikipedia/commons/f/ff/Chess_rdt45.svg",
     },
     {
       name: "queen",
+      quantity: { white: 1, black: 1 },
       img: "https://upload.wikimedia.org/wikipedia/commons/1/15/Chess_qlt45.svg",
       blackImg:
         "https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt45.svg",
     },
     {
       name: "king",
+      quantity: { white: 1, black: 1 },
       img: "https://upload.wikimedia.org/wikipedia/commons/4/42/Chess_klt45.svg",
       blackImg:
         "https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg",
@@ -45,6 +51,7 @@ const CustomChessboard = () => {
   const [isBlack, setIsBlack] = useState(false);
   const [selectedPiece, setSelectedPiece] = useState(pieces[0]);
   const [dragging, setDragging] = useState(false);
+  const [cursorImageUrl, setCursorImageUrl] = useState(pieces[0].img);
 
   const handleDragStart = (e, piece) => {
     setDraggingPiece(piece);
@@ -78,21 +85,52 @@ const CustomChessboard = () => {
 
   const handlePieceClick = (piece) => {
     setSelectedPiece(piece);
+    setCursorImageUrl(isBlack ? piece.blackImg : piece.img);
+  };
+
+  const updateQuantity = (pieceName, color, increment = false) => {
+    setPieces((prevPieces) =>
+      prevPieces.map((piece) => {
+        if (piece.name === pieceName) {
+          const newQuantity = { ...piece.quantity };
+          newQuantity[color] += increment ? 1 : -1;
+          return { ...piece, quantity: newQuantity };
+        }
+        return piece;
+      })
+    );
   };
 
   const handleClick = (e) => {
     const boardCell = e.target.closest(".board-cell");
     if (!boardCell) return;
-    boardCell.innerHTML = "";
+    const currentPieceImg = `<img src="${
+      isBlack ? selectedPiece.blackImg : selectedPiece.img
+    }" alt="${selectedPiece.name}" draggable="false">`;
+    
+    if (boardCell.innerHTML === currentPieceImg) {
+      boardCell.innerHTML = "";
+      updateQuantity(selectedPiece.name, isBlack ? "black" : "white", true);
+    } else {
+      boardCell.innerHTML = currentPieceImg;
+      updateQuantity(selectedPiece.name, isBlack ? "black" : "white", false);
+    }
   };
 
   const toggleColor = () => {
-    setIsBlack(!isBlack);
+    const newIsBlack = !isBlack;
+    setIsBlack(newIsBlack);
+    setCursorImageUrl(newIsBlack ? selectedPiece.blackImg : selectedPiece.img);
   };
 
   return (
     <div className="custom-chessboard">
-      <div className="board ml-auto mr-auto">
+      <div
+        className="board ml-auto mr-auto"
+        style={{
+          cursor: `url(${cursorImageUrl}) 15 15, default`,
+        }}
+      >
         <div className="board-row labels mr-10">
           <div className="empty-label" />
           {[...Array(8)].map((_, col) => (
@@ -143,6 +181,9 @@ const CustomChessboard = () => {
                   alt={piece.name}
                   draggable="false"
                 />
+              </div>
+              <div className="quantity">
+                {isBlack ? piece.quantity.black : piece.quantity.white}
               </div>
             </div>
           ))}
