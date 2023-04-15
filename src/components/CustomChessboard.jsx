@@ -111,35 +111,44 @@ const CustomChessboard = () => {
   const handleClick = (e) => {
     const boardCell = e.target.closest(".board-cell");
     if (!boardCell) return;
-    
+
     const currentPieceImg = `<img src="${
       isBlack ? selectedPiece.blackImg : selectedPiece.img
     }" alt="${selectedPiece.name}" draggable="false">`;
-    
+
     const currentColor = isBlack ? "black" : "white";
     const selectedPieceQuantity = selectedPiece.quantity[currentColor];
-    
+
     if (boardCell.innerHTML === currentPieceImg) {
       boardCell.innerHTML = "";
       updateQuantity(selectedPiece.name, currentColor, true);
     } else if (selectedPieceQuantity > 0) {
-      // Check if there's already a piece in the cell
-      const existingPiece = pieces.find(piece => {
-        const pieceImg = isBlack ? piece.blackImg : piece.img;
-        const pieceHtml = `<img src="${pieceImg}" alt="${piece.name}" draggable="false">`;
-        return boardCell.innerHTML === pieceHtml;
-      });
-  
-      // If there's an existing piece, update its quantity
-      if (existingPiece) {
-        updateQuantity(existingPiece.name, currentColor, true);
+      // Helper function to find the existing piece in the cell
+      const findExistingPiece = (color) => {
+        return pieces.find((piece) => {
+          const pieceImg = color === "black" ? piece.blackImg : piece.img;
+          const pieceHtml = `<img src="${pieceImg}" alt="${piece.name}" draggable="false">`;
+          return boardCell.innerHTML === pieceHtml;
+        });
+      };
+
+      const existingBlackPiece = findExistingPiece("black");
+      const existingWhitePiece = findExistingPiece("white");
+
+      // If there's an existingBlackPiece, update its quantity
+      if (existingBlackPiece) {
+        updateQuantity(existingBlackPiece.name, "black", true);
       }
-  
+
+      // If there's an existingWhitePiece, update its quantity
+      if (existingWhitePiece) {
+        updateQuantity(existingWhitePiece.name, "white", true);
+      }
+
       boardCell.innerHTML = currentPieceImg;
       updateQuantity(selectedPiece.name, currentColor, false);
     }
   };
-  
 
   const toggleColor = () => {
     const newIsBlack = !isBlack;
