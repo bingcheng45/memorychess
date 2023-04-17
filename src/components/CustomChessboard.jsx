@@ -180,7 +180,7 @@ const CustomChessboard = () => {
   };
 
   const handleSingleTap = (e) => {
-    console.log("Single tap");
+    // console.log("Single tap");
     const boardCell = e.target.closest(".board-cell");
     if (!boardCell) return;
     const currentPieceImg = `<img src="${
@@ -222,12 +222,11 @@ const CustomChessboard = () => {
   };
 
   const handleDoubleTap = (e) => {
-    console.log("Double tap");
+    // console.log("Double tap");
     toggleColor();
   };
 
   const handleClick = useSingleAndDoubleTap(handleSingleTap, handleDoubleTap);
-
 
   const toggleColor = () => {
     const newIsBlack = !isBlack;
