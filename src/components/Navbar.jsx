@@ -1,12 +1,31 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../assets/css/NavBar.css";
 
 const Nav = () => {
   const [navOpen, setNavOpen] = useState(false);
+  useEffect(() => {
+    const handleScroll = (e) => {
+      if (navOpen) {
+        e.preventDefault();
+      }
+    };
+    const handleTouchMove = (e) => {
+      if (navOpen) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("wheel", handleScroll, { passive: false });
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
 
+    return () => {
+      document.removeEventListener("wheel", handleScroll, { passive: false });
+      document.removeEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
+    };
+  }, [navOpen]);
   return (
     <div className="nav">
       <div className="nav-container">
