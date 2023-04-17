@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../assets/css/CustomChessboard.css";
+import useSingleAndDoubleTap from "../utils/useSingleAndDoubleTap.jsx";
 
 const CustomChessboard = () => {
   const [pieces, setPieces] = useState([
@@ -49,11 +50,6 @@ const CustomChessboard = () => {
 
   let touchStartX = 0;
   let touchEndX = 0;
-  let lastTouchEndTime = 0;
-  const doublePressDelay = 300; // Time in milliseconds to detect double press
-  const lastTouchEndTimeRef = useRef(0);
-  const doublePressDetectedRef = useRef(false);
-  
 
   const [draggingPiece, setDraggingPiece] = useState(null);
   const [isBlack, setIsBlack] = useState(false);
@@ -62,11 +58,6 @@ const CustomChessboard = () => {
   const [cursorImageUrl, setCursorImageUrl] = useState(pieces[0].img);
 
   useEffect(() => {
-    const doublePress = () => {
-      toggleColor();
-      doublePressDetectedRef.current = true;
-    };
-
     const swipeLeft = () => {
       selectPreviousPiece();
     };
@@ -89,13 +80,7 @@ const CustomChessboard = () => {
         swipeLeft();
       }
 
-      const currentTime = new Date().getTime();
-      if (currentTime - lastTouchEndTimeRef.current < doublePressDelay) {
-        doublePress();
-      } else {
-        doublePressDetectedRef.current = false;
-      }
-      lastTouchEndTimeRef.current = currentTime;
+      // doubleTapHandlers.onTouchEnd();
     };
 
     document.addEventListener("touchstart", handleTouchStart);
@@ -194,37 +179,10 @@ const CustomChessboard = () => {
     });
   };
 
-  const handleClick = (e) => {
+  const handleSingleTap = (e) => {
+    console.log("Single tap");
     const boardCell = e.target.closest(".board-cell");
     if (!boardCell) return;
-    if (doublePressDetectedRef.current) {
-      doublePressDetectedRef.current = false;
-      // Helper function to find the existing piece in the cell
-      const findExistingPiece = (color) => {
-        return pieces.find((piece) => {
-          const pieceImg = color === "black" ? piece.blackImg : piece.img;
-          const pieceHtml = `<img src="${pieceImg}" alt="${piece.name}" draggable="false">`;
-          return boardCell.innerHTML === pieceHtml;
-        });
-      };
-
-      const existingBlackPiece = findExistingPiece("black");
-      const existingWhitePiece = findExistingPiece("white");
-
-      // If there's an existingBlackPiece, update its quantity
-      if (existingBlackPiece) {
-        updateQuantity(existingBlackPiece.name, "black", true);
-      }
-
-      // If there's an existingWhitePiece, update its quantity
-      if (existingWhitePiece) {
-        updateQuantity(existingWhitePiece.name, "white", true);
-      }
-
-      boardCell.innerHTML = "";
-      return;
-    }
-
     const currentPieceImg = `<img src="${
       isBlack ? selectedPiece.blackImg : selectedPiece.img
     }" alt="${selectedPiece.name}" draggable="false">`;
@@ -262,6 +220,14 @@ const CustomChessboard = () => {
       updateQuantity(selectedPiece.name, currentColor, false);
     }
   };
+
+  const handleDoubleTap = (e) => {
+    console.log("Double tap");
+    toggleColor();
+  };
+
+  const handleClick = useSingleAndDoubleTap(handleSingleTap, handleDoubleTap);
+
 
   const toggleColor = () => {
     const newIsBlack = !isBlack;
