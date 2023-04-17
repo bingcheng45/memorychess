@@ -50,6 +50,8 @@ const CustomChessboard = () => {
 
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [touchEndY, setTouchEndY] = useState(0);
   const [draggingPiece, setDraggingPiece] = useState(null);
   const [isBlack, setIsBlack] = useState(false);
   const [selectedPiece, setSelectedPiece] = useState(pieces[0]);
@@ -67,10 +69,12 @@ const CustomChessboard = () => {
 
     const handleTouchStart = (e) => {
       setTouchStartX(e.touches[0].clientX);
+      setTouchStartY(e.touches[0].clientY);
     };
 
     const handleTouchEnd = (e) => {
       setTouchEndX(e.changedTouches[0].clientX);
+      setTouchEndY(e.changedTouches[0].clientY);
       const distance = e.changedTouches[0].clientX - touchStartX;
       if (distance > 100) {
         swipeRight();
@@ -78,9 +82,6 @@ const CustomChessboard = () => {
         swipeLeft();
       }
     };
-
-    document.addEventListener("touchstart", handleTouchStart);
-    document.addEventListener("touchend", handleTouchEnd);
 
     const handleKeyPress = (e) => {
       if (e.key === "s" || e.key === "S") {
@@ -92,13 +93,29 @@ const CustomChessboard = () => {
       }
     };
 
+    const handleTouchMove = (e) => {
+      const deltaX = touchStartX - touchEndX;
+      const deltaY = touchStartY - touchEndY;
+      console.log(deltaX, deltaY)
+      if (Math.abs(deltaX) > 30 || Math.abs(deltaY) < 50) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("keydown", handleKeyPress);
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
       document.removeEventListener("touchstart", handleTouchStart);
       document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
     };
-  }, [isBlack, selectedPiece, cursorImageUrl, touchStartX, touchEndX]);
+  }, [isBlack, selectedPiece, cursorImageUrl, touchStartX, touchEndX, touchStartY, touchEndY]);
 
   const selectPreviousPiece = () => {
     const currentIndex = pieces.findIndex(
