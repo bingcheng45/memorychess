@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../assets/css/CustomChessboard.css";
 import useSingleAndDoubleTap from "../utils/useSingleAndDoubleTap.jsx";
+import { detectDevice } from "../utils/DetectDevice";
 
 const CustomChessboard = () => {
   const [pieces, setPieces] = useState([
@@ -96,7 +97,7 @@ const CustomChessboard = () => {
     const handleTouchMove = (e) => {
       const deltaX = touchStartX - touchEndX;
       const deltaY = touchStartY - touchEndY;
-      console.log(deltaX, deltaY)
+      console.log(deltaX, deltaY);
       if (Math.abs(deltaX) > 30 || Math.abs(deltaY) < 50) {
         e.preventDefault();
       }
@@ -115,7 +116,15 @@ const CustomChessboard = () => {
         passive: false,
       });
     };
-  }, [isBlack, selectedPiece, cursorImageUrl, touchStartX, touchEndX, touchStartY, touchEndY]);
+  }, [
+    isBlack,
+    selectedPiece,
+    cursorImageUrl,
+    touchStartX,
+    touchEndX,
+    touchStartY,
+    touchEndY,
+  ]);
 
   const selectPreviousPiece = () => {
     const currentIndex = pieces.findIndex(
@@ -239,7 +248,9 @@ const CustomChessboard = () => {
     toggleColor();
   };
 
-  const handleClick = useSingleAndDoubleTap(handleSingleTap, handleDoubleTap);
+  const handleClick = detectDevice()
+    ? useSingleAndDoubleTap(handleSingleTap, handleDoubleTap)
+    : handleSingleTap;
 
   const toggleColor = () => {
     const newIsBlack = !isBlack;

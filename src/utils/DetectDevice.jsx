@@ -7,9 +7,11 @@ export const detectDevice = () => {
       );
   
     if (isMobile) {
-      console.log("Device: Mobile");
+      // console.log("Device: Mobile");
+      return true;
     } else {
-      console.log("Device: Laptop/PC");
+      // console.log("Device: Laptop/PC");
+      return false;
     }
   };
   
