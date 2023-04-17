@@ -48,9 +48,8 @@ const CustomChessboard = () => {
     },
   ]);
 
-  let touchStartX = 0;
-  let touchEndX = 0;
-
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
   const [draggingPiece, setDraggingPiece] = useState(null);
   const [isBlack, setIsBlack] = useState(false);
   const [selectedPiece, setSelectedPiece] = useState(pieces[0]);
@@ -67,20 +66,17 @@ const CustomChessboard = () => {
     };
 
     const handleTouchStart = (e) => {
-      touchStartX = e.touches[0].clientX;
+      setTouchStartX(e.touches[0].clientX);
     };
 
     const handleTouchEnd = (e) => {
-      touchEndX = e.changedTouches[0].clientX;
-      const distance = touchEndX - touchStartX;
-
+      setTouchEndX(e.changedTouches[0].clientX);
+      const distance = e.changedTouches[0].clientX - touchStartX;
       if (distance > 100) {
         swipeRight();
       } else if (distance < -100) {
         swipeLeft();
       }
-
-      // doubleTapHandlers.onTouchEnd();
     };
 
     document.addEventListener("touchstart", handleTouchStart);
@@ -102,7 +98,7 @@ const CustomChessboard = () => {
       document.removeEventListener("touchstart", handleTouchStart);
       document.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [isBlack, selectedPiece, cursorImageUrl]);
+  }, [isBlack, selectedPiece, cursorImageUrl, touchStartX, touchEndX]);
 
   const selectPreviousPiece = () => {
     const currentIndex = pieces.findIndex(
@@ -222,7 +218,7 @@ const CustomChessboard = () => {
   };
 
   const handleDoubleTap = (e) => {
-    // console.log("Double tap");
+    console.log("Double tap");
     toggleColor();
   };
 
