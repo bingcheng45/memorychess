@@ -98,7 +98,7 @@ const CustomChessboard = () => {
       const deltaX = touchStartX - touchEndX;
       const deltaY = touchStartY - touchEndY;
       console.log(deltaX, deltaY);
-      if (Math.abs(deltaX) > 30 || Math.abs(deltaY) < 50) {
+      if (Math.abs(deltaX) > 30 && Math.abs(deltaY) < 30) {
         e.preventDefault();
       }
     };
