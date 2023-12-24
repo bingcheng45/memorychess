@@ -1,0 +1,18 @@
+.chessboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adjust the height and width to match the chessboard's size */
+    height: 600px; /* Example height */
+    width: 600px; /* Example width */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .start-game-button {
+    /* Additional button styling */
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    /* ... other styling as needed ... */
+  }
+  
