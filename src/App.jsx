@@ -16,7 +16,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="h-auto w-full min-w-fit bg-black text-white pt-32 grid">
+    <div className="h-auto w-full min-w-fit bg-black text-white pt-20 sm:pt-32 grid">
       <BrowserRouter basename="/memorychess">
         <NavBar />
         <Routes>

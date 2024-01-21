@@ -35,8 +35,8 @@ const Nav = () => {
           }`}
         >
           <div className="logo text-xs sm:text-lg">MemoryChess.co</div>
+          <div className="signup text-xs sm:text-lg">Signup/Login</div>
           <div className="flex items-center">
-            <div className="signup text-xs sm:text-lg">Signup/Login</div>
             <div className="menu-toggle" onClick={() => setNavOpen(!navOpen)}>
               <div
                 className={`${

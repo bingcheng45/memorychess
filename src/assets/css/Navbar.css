@@ -20,6 +20,7 @@
   font-family: "Monument Extended";
   font-weight: bolder;
   text-transform: uppercase;
+  padding-left: 24px; /* Add left padding */
 }
 
 .signup {
@@ -201,5 +202,14 @@ ul.nav-links li a {
 
   .nav-social-media ul li a {
     padding: 0 1em;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0.5em;
+  }
+  .signup {
+    right: 70px;
   }
 }

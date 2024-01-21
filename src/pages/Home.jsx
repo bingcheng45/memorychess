@@ -81,64 +81,68 @@ function Home() {
 
       <div className="text-center">
         <br />
-        {isMobile ? (
+        {gameStarted && (
           <>
-            <h1>Mobile shortcuts:</h1>
-            <h1>Double tap to change color</h1>
-            <h1>Swipe left to move to left piece</h1>
-            <h1>Swipe right to move to right piece</h1>
-          </>
-        ) : (
-          <>
-            <h1>Keyboard shortcuts:</h1>
-            <h1>Press S to change color</h1>
-            <h1>Press A to move to left piece</h1>
-            <h1>Press D to move to right piece</h1>
+            {isMobile ? (
+              <>
+                <h1>Mobile shortcuts:</h1>
+                <h1>Double tap to change color</h1>
+                <h1>Swipe left to move to left piece</h1>
+                <h1>Swipe right to move to right piece</h1>
+              </>
+            ) : (
+              <>
+                <h1>Keyboard shortcuts:</h1>
+                <h1>Press S to change color</h1>
+                <h1>Press A to move to left piece</h1>
+                <h1>Press D to move to right piece</h1>
+              </>
+            )}
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
+            <h1>bro</h1>
           </>
         )}
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
-        <h1>bro</h1>
       </div>
     </div>
   );

@@ -1,20 +1,36 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: green;
+}
+
 .chessboard-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Adjust the height and width to match the chessboard's size */
-    height: 600px; /* Example height */
-    width: 600px; /* Example width */
-    margin: 0 auto; /* Center the container horizontally */
-  }
-  
-  .start-game-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Use percentage or viewport units for responsive sizing */
+  width: 80%; /* Adjust as needed */
+  max-width: 800px; /* Set a maximum width if needed */
+  height: auto; /* Let the height adjust proportionally */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.start-game-button {
+  padding: 10px 0px;
+  font-size: 1.2em;
+  cursor: pointer;
+  max-width: 600px; /* Limit the maximum width */
+  width: 100%; /* Ensure it takes the full width within the limit */
+  margin: 0 auto; /* Center horizontally */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  height: 100vh; /* Set the height to 100% of the viewport height */
+}
+
+
 .timer-display {
-    font-family: 'Courier New', monospace; /* Use a monospaced font */
-  }
-  
+  font-family: "Courier New", monospace; /* Use a monospaced font */
+}
