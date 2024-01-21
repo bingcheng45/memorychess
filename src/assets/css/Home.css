@@ -9,10 +9,12 @@
   }
   
   .start-game-button {
-    /* Additional button styling */
     padding: 10px 20px;
     font-size: 1.2em;
     cursor: pointer;
-    /* ... other styling as needed ... */
+  }
+  
+.timer-display {
+    font-family: 'Courier New', monospace; /* Use a monospaced font */
   }
   

@@ -147,15 +147,17 @@ const CustomChessboard = () => {
   };
 
   const handleDragStart = (e, piece) => {
-    setDraggingPiece(piece);
-    setSelectedPiece(piece);
-    setDragging(true);
-    e.dataTransfer.setData("text/plain", piece.name);
-    const img = new Image();
-    img.src = isBlack ? piece.blackImg : piece.img;
-    e.dataTransfer.setDragImage(img, 22, 22);
-    e.dataTransfer.dropEffect = "move";
+    if (piece.quantity[isBlack ? "black" : "white"] > 0) {
+      setDraggingPiece(piece);
+      setDragging(true);
+      e.dataTransfer.setData("text/plain", piece.name);
+      const img = new Image();
+      img.src = isBlack ? piece.blackImg : piece.img;
+      e.dataTransfer.setDragImage(img, 22, 22);
+      e.dataTransfer.dropEffect = "move";
+    }
   };
+  
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -169,12 +171,30 @@ const CustomChessboard = () => {
   const handleDrop = (e, row, col) => {
     e.preventDefault();
     const boardCell = e.target.closest(".board-cell");
-    if (!boardCell) return;
-    boardCell.innerHTML = `<img src="${
-      isBlack ? draggingPiece.blackImg : draggingPiece.img
-    }" alt="${draggingPiece.name}" draggable="false" />`;
+    if (!boardCell || !draggingPiece) return;
+  
+    // Check if the quantity is more than 0 before placing on the board
+    const currentColor = isBlack ? "black" : "white";
+    if (draggingPiece.quantity[currentColor] > 0) {
+      boardCell.innerHTML = `<img src="${
+        isBlack ? draggingPiece.blackImg : draggingPiece.img
+      }" alt="${draggingPiece.name}" draggable="false" />`;
+  
+      // Reduce the quantity by 1
+      updateQuantity(draggingPiece.name, currentColor, false);
+  
+      // Update cursor image to the recently placed piece
+      setCursorImageUrl(isBlack ? draggingPiece.blackImg : draggingPiece.img);
+  
+      // Update selected piece to the recently placed piece
+      setSelectedPiece(draggingPiece);
+    }
+  
     setDraggingPiece(null);
   };
+  
+  
+  
 
   const handlePieceClick = (piece) => {
     setSelectedPiece(piece);
